@@ -4,7 +4,16 @@ import 'package:devquiz/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class QuizCardWidget extends StatelessWidget {
-  const QuizCardWidget({Key? key}) : super(key: key);
+  final String title;
+  final String completed;
+  final double percent;
+
+  const QuizCardWidget({
+    Key? key,
+    required this.title,
+    required this.completed,
+    required this.percent,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +33,12 @@ class QuizCardWidget extends StatelessWidget {
             child: Image.asset(AppImages.blocks),
           ),
           SizedBox(height: 20,),
-          Text('Gerenciamento de estado', style: AppTextStyles.heading15,),
+          Text(title, style: AppTextStyles.heading15,),
           SizedBox(height: 20,),
           Row(
             children: [
-              Expanded(flex: 1, child: Text('3/10', style: AppTextStyles.body11,)),
-              Expanded(flex: 3, child: LinearProgressIndicator(color: AppColors.chartSecondary, valueColor: AlwaysStoppedAnimation<Color>(AppColors.chartPrimary), value: 0.4))
+              Expanded(flex: 1, child: Text(completed, style: AppTextStyles.body11,)),
+              Expanded(flex: 3, child: LinearProgressIndicator(color: AppColors.chartSecondary, valueColor: AlwaysStoppedAnimation<Color>(AppColors.chartPrimary), value: percent))
             ],
           ),
         ],

@@ -6,7 +6,7 @@ class UserModel {
   UserModel({
     required this.name,
     required this.url,
-    required this.score
+    this.score = 0,
   });
 }
 

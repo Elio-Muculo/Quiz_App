@@ -2,10 +2,15 @@ import 'package:devquiz/core/app_gradients.dart';
 import 'package:devquiz/core/app_images.dart';
 import 'package:devquiz/core/app_text_styles.dart';
 import 'package:devquiz/home/widgets/score_card/score_card_widget.dart';
+import 'package:devquiz/shared/models/user_model.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarWidget({Key? key}) : super(
+  final UserModel user;
+  const AppBarWidget({
+    Key? key,
+    required this.user
+  }) : super(
       key: key,
   );
 
@@ -27,11 +32,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   Text.rich(
                     TextSpan(
-                      text: 'Olá',
+                      text: 'Olá ',
                       style: AppTextStyles.title,
                       children: [
                         TextSpan(
-                          text: ', Elliot',
+                          text: user.name,
                           style: AppTextStyles.titleBold
                         )
                       ]
@@ -43,7 +48,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                            image: AssetImage(AppImages.git),
+                            image: AssetImage(user.url),
                         )
                     ),
                   ),
