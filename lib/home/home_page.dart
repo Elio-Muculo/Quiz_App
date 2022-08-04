@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
     controller.stateNotifier.addListener(() {
       setState(() => {});
     });
-
   }
 
   @override

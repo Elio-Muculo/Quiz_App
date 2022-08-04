@@ -3,12 +3,12 @@
        
           "title": "NLW 5 Flutter",
           "imagem": "blocks",
-          "questionAnswered": 1,
-          "level": "facil",
+          "questionsAnswered": 1,
+          "level": "fácil",
           "questions": [
            {
              "title": "Está curtindo o Flutter?", 
-                "awnsers": [
+                "answers": [
                             {"title": "Estou curtindo"},
                             {"title": "Amando Flutter"},
                             {"title": "Muito top"},
@@ -17,7 +17,7 @@
            } ,
             {
              "title": "Está curtindo o Flutter?", 
-                "awnsers": [
+                "answers": [
                             {"title": "Estou curtindo"},
                             {"title": "Amando Flutter"},
                             {"title": "Muito top"},

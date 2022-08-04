@@ -1,4 +1,5 @@
 import 'package:devquiz/core/app_images.dart';
+import 'package:devquiz/home/home_repository.dart';
 import 'package:devquiz/home/home_state.dart';
 import 'package:devquiz/shared/models/answer_model.dart';
 import 'package:devquiz/shared/models/questions_model.dart';
@@ -14,6 +15,8 @@ class HomeController {
   // Quiz
   List<QuizModel>? quizzes = null;
 
+  final repository = new HomeRepository();
+
   // State
   // var state = HomeState.empty;
   final stateNotifier =  ValueNotifier<HomeState>(HomeState.empty);
@@ -22,92 +25,14 @@ class HomeController {
 
   void getUser() async {
     state = HomeState.loading;
-    await Future.delayed(const Duration(seconds: 3));
-    user = UserModel(name: "Eliot", url: AppImages.git, score: 0);
+    user = await repository.getUser();
     state = HomeState.sucesso;
   }
 
   void getQuizs() async {
     state = HomeState.loading;
-    await Future.delayed(const Duration(seconds: 3));
-    quizzes = [
-      QuizModel(
-          title: "NLW 5 Flutter",
-          questions: [
-            QuestionModel(
-                title: "O que está curtido o flutter",
-                answers: [
-                  AnswerModel(title: "Estou curtido"),
-                  AnswerModel(title: "Estou adorando"),
-                  AnswerModel(title: "Amando o flutter", isRight: true),
-                  AnswerModel(title: "Muito top o nlw 5"),
-                ])
-          ],
-          imagem: AppImages.blocks,
-          level: Level.facil,
-          questionsAnswered: 0
-      ),
-      QuizModel(
-          title: "NLW 6 Flutter",
-          questions: [
-            QuestionModel(
-                title: "O que está curtido o flutter",
-                answers: [
-                  AnswerModel(title: "Estou curtido"),
-                  AnswerModel(title: "Estou adorando"),
-                  AnswerModel(title: "Amando o flutter", isRight: true),
-                  AnswerModel(title: "Muito top o nlw 5"),
-                ]
-            ),
-            QuestionModel(
-                title: "O que está curtido o flutter",
-                answers: [
-                  AnswerModel(title: "Estou curtido"),
-                  AnswerModel(title: "Estou adorando"),
-                  AnswerModel(title: "Amando o flutter", isRight: true),
-                  AnswerModel(title: "Muito top o nlw 5"),
-                ]
-            ),
-            QuestionModel(
-                title: "O que está curtido o flutter",
-                answers: [
-                  AnswerModel(title: "Estou curtido"),
-                  AnswerModel(title: "Estou adorando"),
-                  AnswerModel(title: "Amando o flutter", isRight: true),
-                  AnswerModel(title: "Muito top o nlw 5"),
-                ]
-            ),
-            QuestionModel(
-                title: "O que está curtido o flutter",
-                answers: [
-                  AnswerModel(title: "Estou curtido"),
-                  AnswerModel(title: "Estou adorando"),
-                  AnswerModel(title: "Amando o flutter", isRight: true),
-                  AnswerModel(title: "Muito top o nlw 5"),
-                ]
-            )
-          ],
-          imagem: AppImages.blocks,
-          level: Level.facil,
-          questionsAnswered: 3
-      ),
-      QuizModel(
-          title: "NLW 7 Flutter",
-          questions: [
-            QuestionModel(
-                title: "O que está curtido o flutter",
-                answers: [
-                  AnswerModel(title: "Estou curtido"),
-                  AnswerModel(title: "Estou adorando"),
-                  AnswerModel(title: "Amando o flutter", isRight: true),
-                  AnswerModel(title: "Muito top o nlw 5"),
-                ])
-          ],
-          imagem: AppImages.blocks,
-          level: Level.facil,
-          questionsAnswered: 0
-      ),
-    ];
+
+    quizzes = await repository.getQuizzes();
 
     state = HomeState.sucesso;
   }

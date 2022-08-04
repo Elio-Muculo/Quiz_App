@@ -10,7 +10,7 @@ class AppWidget extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "DevQuiz",
-      home: HomePage(),
+      home: ChallengePage(),
     );
   }
 }
