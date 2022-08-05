@@ -13,12 +13,12 @@ class QuizWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 40),
+      padding: const EdgeInsets.only(top: 15),
       child: Center(
         child: Column(
           children: [
-            const SizedBox(height: 15,),
             Text(question.title, style: AppTextStyles.heading,),
+            const SizedBox(height: 15,),
             ...question
               .answers
               .map((e) =>
@@ -28,7 +28,7 @@ class QuizWidget extends StatelessWidget {
                 )
               )
               .toList(),
-            const SizedBox(height: 24.0,),
+            const SizedBox(height: 10.0,),
           ],
         ),
       ),

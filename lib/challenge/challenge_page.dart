@@ -1,3 +1,4 @@
+import 'package:devquiz/challenge/challenge_controller.dart';
 import 'package:devquiz/challenge/widgets/next_button/next_button.dart';
 import 'package:devquiz/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:devquiz/challenge/widgets/quiz/quiz_widget.dart';
@@ -14,6 +15,16 @@ class ChallengePage extends StatefulWidget {
 }
 
 class _ChallengePageState extends State<ChallengePage> {
+  final controller = new ChallengeController();
+  final pageController = new PageController();
+
+  void initState() {
+    pageController.addListener(() {
+      controller.currentPage = pageController.page!.toInt() + 1;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,15 +32,24 @@ class _ChallengePageState extends State<ChallengePage> {
         preferredSize: const Size.fromHeight(100),
         child: SafeArea(top: true, child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            BackButton(
-
+          children:  [
+            const BackButton(),
+            ValueListenableBuilder<int>(
+              valueListenable: controller.currentPageNotifier,
+              builder: (context, value, _) =>
+                  QuestionIndicatorWidget(
+                currentPage: value,
+                size: widget.question.length,
+              ),
             ),
-            QuestionIndicatorWidget(),
           ],
         )),
       ),
-      body: QuizWidget(question: widget.question[0]),
+      body: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: pageController,
+        children:widget.question.map((e) => QuizWidget(question: e)).toList()
+      ),
       bottomNavigationBar: SafeArea(
         bottom: true,
         child: Padding(
@@ -37,7 +57,9 @@ class _ChallengePageState extends State<ChallengePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Expanded(child: NextButton.white('Fácil', onTap: () => {  },)),
+              Expanded(child: NextButton.white('Pular', onTap: () => { 
+                pageController.nextPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn)
+              },)),
               const SizedBox(width: 7,),
               Expanded(child: NextButton.green('Confirmar', onTap: () => {  },))
             ],

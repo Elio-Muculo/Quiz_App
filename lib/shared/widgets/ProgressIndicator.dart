@@ -11,6 +11,6 @@ class ProgressIndicatorBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LinearProgressIndicator(color: AppColors.chartSecondary, valueColor: AlwaysStoppedAnimation<Color>(AppColors.chartPrimary), value: 0.4);
+    return LinearProgressIndicator(color: AppColors.chartSecondary, valueColor: AlwaysStoppedAnimation<Color>(AppColors.chartPrimary), value: value);
   }
 }
