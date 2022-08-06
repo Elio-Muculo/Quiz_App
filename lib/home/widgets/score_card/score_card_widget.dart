@@ -11,7 +11,7 @@ class ScoreCardWIdget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Container(
-        height: 136,
+        height: 132,
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(15)
@@ -34,6 +34,7 @@ class ScoreCardWIdget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Vamos começar', style: AppTextStyles.heading,),
+                      SizedBox(height: 10,),
                       Text('Complete os desafios e ', style: AppTextStyles.body,),
                       Text('avance em conhecimento', style: AppTextStyles.body,)
                     ],

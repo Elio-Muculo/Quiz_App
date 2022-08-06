@@ -25,6 +25,10 @@ class _ChallengePageState extends State<ChallengePage> {
     super.initState();
   }
 
+  void nextPage() {
+    pageController.nextPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,22 +52,31 @@ class _ChallengePageState extends State<ChallengePage> {
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: pageController,
-        children:widget.question.map((e) => QuizWidget(question: e)).toList()
+        children:widget.question.map((e) => QuizWidget(question: e, onChange: nextPage,)).toList()
       ),
       bottomNavigationBar: SafeArea(
         bottom: true,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Expanded(child: NextButton.white('Pular', onTap: () => { 
-                pageController.nextPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn)
-              },)),
-              const SizedBox(width: 7,),
-              Expanded(child: NextButton.green('Confirmar', onTap: () => {  },))
-            ],
-          ),
+          child:
+              ValueListenableBuilder<int>(
+                valueListenable: controller.currentPageNotifier,
+                builder: (context, value, _) =>
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(child: NextButton.white('Pular', onTap: () => {
+                      nextPage()
+                    },)),
+                    if (value == widget.question.length )
+                    const SizedBox(width: 7,),
+                    if (value == widget.question.length )
+                     Expanded(child: NextButton.green('Confirmar', onTap: () => { 
+                       Navigator.pop(context)
+                     },))
+                  ],
+                ),
+              ),
         ),
       ),
     );
